@@ -7,12 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class TestpostDto {
+public class CommentDto {
 
     @AllArgsConstructor
     @NoArgsConstructor
@@ -21,24 +17,12 @@ public class TestpostDto {
     @Getter
     public static class CreateReqDto extends DefaultDto.CreateReqDto {
 
-        private String userId;
-        private String title;
+        private String author;
         private String content;
+        private Testpost testpost;
 
-        private MultipartFile file;
-        private String sfile;
-
-        private List<CommentDto.CreateReqDto> commentsDto = new ArrayList<>();
-
-        public Testpost toEntity() {
-            List<Comment> commentsEntity = new ArrayList<>();
-            if (commentsDto != null) {
-                commentsDto.forEach(c -> {
-                    Comment comment = c.toEntity();
-                    commentsDto.add(c);
-                });
-            }
-            return Testpost.of(getUserId(), getTitle(), getContent(), getSfile(), commentsEntity);
+        public Comment toEntity() {
+            return Comment.of(getAuthor(), getContent(), getTestpost());
         }
     }
 
@@ -49,8 +33,7 @@ public class TestpostDto {
     @Getter
     public static class UpdateReqDto extends DefaultDto.UpdateReqDto {
 
-        private String userId;
-        private String title;
+        private String author;
         private String content;
 
     }
@@ -61,9 +44,10 @@ public class TestpostDto {
     @Getter
     public static class DetailResDto extends DefaultDto.DetailResDto {
 
-        private String userId;
-        private String title;
+        private String author;
         private String content;
+        private Long testpost_id;
+        private Testpost testpost;
 
     }
 
@@ -74,7 +58,7 @@ public class TestpostDto {
     @Getter
     public static class ListReqDto extends DefaultDto.ListReqDto {
 
-        private String title;
+        private String author;
 
     }
 }
