@@ -1,6 +1,5 @@
 package com.example.demo.mapper;
 
-import com.example.demo.dto.NoticeDto;
 import com.example.demo.dto.TestpostDto;
 
 import java.util.List;
