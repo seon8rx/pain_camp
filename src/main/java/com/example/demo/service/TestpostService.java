@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.DefaultDto;
+import com.example.demo.dto.NoticeDto;
 import com.example.demo.dto.TestpostDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,7 +26,7 @@ public interface TestpostService {
     void deletes(DefaultDto.DeletesReqDto param);
 
     //FILE UPLOAD
-    void saveFile(MultipartFile param) throws IOException;
+    String saveFile(MultipartFile param) throws IOException;
 
     //PAGED LIST
     public DefaultDto.PagedListResDto pagedList(TestpostDto.PagedListReqDto params);
